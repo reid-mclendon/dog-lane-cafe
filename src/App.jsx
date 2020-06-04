@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
+import Footer from './Footer';
 import {
   BrowserRouter as Router,
   Switch,
@@ -53,6 +54,7 @@ const App = () => {
           <Route path="/menu" component={Menu}/>
         </Switch>
      </Router>
+     <Footer/>
   </>
   );
 
