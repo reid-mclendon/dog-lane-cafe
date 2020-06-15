@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
@@ -8,9 +8,11 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Home from './Home';
+import Home from './Menu';
 import Menu from './Menu';
-
+import Burger from './Burger';
+import Nav from './Nav';
+import Editor from './Editor';
 // Goal 000: Create GitHub repo
 // Goal 001: Create Header component that will display logo, site navigation, and header image
 // Goal 002: Integrate react-router
@@ -44,17 +46,67 @@ const initialMenu = [
   }
 ]
 
+const menu = [
+  {
+        id: 0,
+        name: 'Breakfast',
+        items: [
+           {
+              id: 0,
+              title: 'Egg Sandwiches $5.75 w/meat $7.75',
+              desc: 'Your Choice of Bread and Cheese',
+           },
+           {
+               id: 1,
+               title: 'Spinach Omelet $10',
+               desc: 'w/ Cheddar Cheese, Toasted English Muffin',
+           },
+           {
+               id: 2,
+               title: 'Ham & Cheddar Omelet $10',
+               desc: 'Toasted English Muffin',
+           }
+        ]
+    },
+    {
+          id: 1,
+          name: 'Salads',
+          items: [
+              {
+                  id: 0,
+                  title: 'Grilled Chicken Cobb Salad $14.5',
+                  desc: 'Coleman’s All Natural Grilled Chicken, Mixed Greens',
+              },
+              {
+                  id: 1,
+                  title: 'Garden Salad / Roasted Beet & Arugula / Caesar',
+                  desc: 'sm $6.75 lg $12',
+              },
+          ]
+      },
+      {
+          id: 2,
+          name: 'Soups / Chili',
+          items: [
+              {
+                  id: 0,
+                  title: 'Chicken Vegetable Rice or Gumbo',
+                  desc: 'cup $5.25 bowl $6.75',
+              }
+          ]
+      }
+]
+
 const App = () => {
   return (
   <>
       <Header/>
       <Router>
         <Switch>
-          <Route exact path="/" component = {Home}/>
-          <Route path="/menu" component={Menu}/>
+          <Route exact path="/" render={(props) => <Menu {...props} canEdit={false} menu={menu}/>}/>
+          <Route path="/edit" render={(props) => <Menu {...props} canEdit={true} menu={menu}/>}/>
         </Switch>
      </Router>
-     <Footer/>
   </>
   );
 
